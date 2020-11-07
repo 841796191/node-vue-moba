@@ -1,0 +1,135 @@
+//定义scss变量，style保留循环实现
+
+//定义颜色,当定义的键值对中有歧义的单词时用""括起来
+$colors:(
+    "primary":#db9e3f,
+    "info":#4b67af,
+    "danger":#791a15,
+    "blue":#4394e4,
+    "blue-1":#1f3695,
+    "white":#fff,
+    "white-1":#fcfcfc,
+    "white-2":#eceef0,
+    "light":#f9f9f9,
+    "light-1":#d4d9de,
+    "grey":#999,
+    "grey-1":#666,
+    "dark-1":#343440,
+    "dark":#222,
+    "black":#000
+);
+
+$border-color:map-get($colors,'light-1');
+
+//font-size  px转rem用插件px to rem  使用：alt+z  alt+s设置1rem等于多少px
+$base-font-size:1rem;
+$font-sizes:(xxs:0.6154,
+    xs:0.7692, //10px
+    sm:0.9231, //12px
+    md:1, //13px
+    lg:1.0769, //14px
+    xl:1.2308, //16px
+);
+
+//text-overflow,文字溢出隐藏
+.text-ellipsis{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+//width,height
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+//flex
+.d-flex {
+    display: flex;
+}
+
+//交叉轴对齐
+$flex-jc:(start:flex-start,
+    end:flex-end,
+    center:center,
+    between:space-between,
+    around:space-around,
+);
+
+
+$flex-ai:(start:flex-start,
+    end:flex-end,
+    center:center,
+    stretch:stretch,
+);
+
+
+.flex-1 {
+    flex: 1
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+//spacing
+//.mt-1 => margin-top
+$spacing-types:(m:margin, p:padding);
+$spacing-directions:(t:top, r:right, b:bottom, l:left);
+$spacing-base-size:1rem;
+$spacing-sizes:(0:0, 1:0.25, 2:0.5, 3:1, 4:1.5, 5:3);
+
+//button
+.btn {
+    border: none;
+    border-radius: 0.1538rem;
+    //通过map-get从之前预定义的变量中取值
+    font-size: map-get($font-sizes, 'sm') * $base-font-size;
+    padding: 0.2rem 0.6rem;
+
+    &.btn-lg{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        i{
+            color: map-get($colors,'primary');
+            font-weight:bold;
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        background: map-get($colors, 'white-1' );
+        border: 1px solid map-get($colors,'white-2');
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+//nav
+.nav {
+    display: flex;
+    .nav-item {
+        border-bottom: 3px solid transparent;
+        padding: 0.2rem;
+
+        &.active {
+            //加&表示上一层本身
+            color: map-get($colors, 'primary');
+            border-bottom-color: map-get($colors, 'primary');
+        }
+    }
+
+    &.nav-inverse{
+        .nav-item{
+            color: map-get($colors, 'white');
+            &.active{
+                border-bottom-color:map-get($colors, 'white') ;
+            }
+        }
+    }
+}

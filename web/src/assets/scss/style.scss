@@ -1,0 +1,187 @@
+//引入定义好的scss变量
+@import "./variables";//被引入的文件默认以下划线开头，但引用时又不用写下划线
+
+//设置一些全局样式，引入后就可以向使用boostrap一样
+
+//reset  重置默认样式，这样可以防止一些浏览器默认样式不一样
+*{
+    //设置默认盒模型，这样设置margin、border等样式时会挤压内部元素而不会撑大元素
+    box-sizing: border-box;
+    outline: none;//取消高亮显示
+}
+
+html{
+    font-size: 13px;
+}
+
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2em;
+    background: #f1f1f1;
+    -webkit-font-smoothing:antialiased;
+}
+
+a{
+    color: #999;
+}
+
+p{
+    line-height: 1.5rem;
+}
+
+//定义颜色
+@each $colorKey,$color in $colors {
+    .text-#{$colorKey}{
+        color: $color;
+    }
+    .bg-#{$colorKey}{
+        background-color: $color;
+    }
+}
+
+//text align 文字对齐
+//@each是循环，in后是一个集合
+@each $var in (left,center,right) {
+    .text-#{$var}{//编译成text-left,text-center,text-right
+        text-align: $var !important;
+    }
+}
+
+//font-size  px转rem用插件px to rem  使用：alt+z  alt+s设置1rem等于多少px
+@each $sizeKey,$size in $font-sizes {
+    .fs-#{$sizeKey}{
+        font-size: $size * $base-font-size;
+    }
+}
+
+//flex
+.d-flex {
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+@each $key,$value in $flex-jc {
+    .jc-#{$key}{
+        justify-content: $value;
+    }
+}
+
+
+//align-item
+@each $key,$value in $flex-ai {
+    .ai-#{$key}{
+        align-items:$value
+    }
+}
+
+//spacing
+@each $typeKey,$type in $spacing-types {
+    //.m-1
+    @each $sizeKey,$size in $spacing-sizes {
+        .#{$typeKey}-#{$sizeKey}{
+            #{$type}:$size * $spacing-base-size;
+        }
+    }
+
+    //.mx-1 设置左右margin或padding   .my-1 设置上下margin或padding
+    @each $sizeKey,$size in $spacing-sizes {
+        .#{$typeKey}x-#{$sizeKey} {
+            #{$type}-left: $size * $spacing-base-size;
+            #{$type}-right: $size * $spacing-base-size;
+        }
+
+        .#{$typeKey}y-#{$sizeKey} {
+            #{$type}-top: $size * $spacing-base-size;
+            #{$type}-bottom: $size * $spacing-base-size;
+        }
+    }
+
+    //.mt-1
+    @each $directionKey,$direction in $spacing-directions {
+        @each $sizeKey,$size in $spacing-sizes {
+            //生成.mt-1{margin:0.25rem}形式
+            .#{$typeKey}#{$directionKey}-#{$sizeKey}{
+                #{$type}-#{$direction}:$size * $spacing-base-size;
+            }
+        }
+    }
+}
+
+//sprite 精灵图标(雪碧图)
+.sprite{
+    background: url(../images/index.png) no-repeat 0 0;
+    background-size: 28.8462rem;
+    display: inline-block;
+    &.sprite-news{//爆料站
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 63.546% 15.517%;
+    }
+    &.sprite-story{//故事站
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-shopping{//周边商城
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-experience{//体验服
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-newpeople{//新人专区
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-honour{//荣耀传承
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-community{//同人社区
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-king{//王者营地
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-public{//公众号
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite-version{//版本介绍
+        width: 1.7692rem;
+        height: 1.5385rem;
+        background-position: 90.483% 15.614%;
+    }
+
+    &.sprite-arrow{
+        //箭头
+        width: 0.7692rem;
+        height: 0.7692rem;
+        background-position: 38.577% 52.076%;
+    }
+}
+
+//borders
+@each $dir in (top,right,bottom,left){
+    .border-#{$dir}{
+        border-#{$dir}:1px solid $border-color;
+    }
+}
